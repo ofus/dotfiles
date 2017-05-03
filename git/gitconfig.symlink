@@ -1,9 +1,9 @@
 # gitconfig
 [user]
-	name = Zuhaib
-	email = zzakaria@vmware.com
+    name = ofus
+    email = email = andrew@aljweb.com
 [github]
-	user = nerdpad
+    user = ofus
 [init]
     templatedir = ~/.dotfiles/git/templates
 [alias]
@@ -16,6 +16,7 @@
     co = checkout
     cob = checkout -b
     s = status --short
+    st = status
     ss  = status
     br = branch -v
 
@@ -92,9 +93,6 @@
     # remove grep - Remove found files that are NOT under version control
     rg = "!sh -c 'git ls-files --others --exclude-standard | grep $1 | xargs rm' -"
 
-    # Kaleidoscope commands
-    dkal = difftool -y -t Kaleidoscope
-    mkal = mergetool -y -t Kaleidoscope
     remotes = remote -v
 
     # check out a local copy of a PR. https://gist.github.com/gnarf/5406589
@@ -126,7 +124,8 @@
     default = current
 [branch]
     # set up 'git pull' to rebase instead of merge
-    autosetuprebase = always
+    # autosetuprebase = always
+    autosetupmerge = true
 [diff]
     renames = copies
     mnemonicprefix = true
@@ -136,11 +135,15 @@
 [apply]
     # do not warn about missing whitespace at EOF
     whitespace = nowarn
+    ignorewhitespace = change
 [core]
     excludesfile = ~/.gitignore_global
+    attributesfile = $HOME/.gitattributes
     pager = less -FXRS -x2
     editor = vim
     whitespace = cr-at-eol
+    eol = lf
+    autocrlf = input
 [rerere]
     enabled = true
 [gitsh]
@@ -148,15 +151,13 @@
 [grep]
     extendRegexp = true
     lineNumber = true
-[credential]
-	helper = osxkeychain
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
 [rebase]
-	instructionFormat = "[%an - %ar] %s"
+    instructionFormat = "[%an - %ar] %s"
 [pager]
     diff = "diff-so-fancy | less --tabs=4 -RFX"
     show = "diff-so-fancy | less --tabs=4 -RFX"
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

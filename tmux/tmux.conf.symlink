@@ -1,4 +1,4 @@
-set -g default-command "login-shell"
+# set -g default-command "login-shell"
 
 # tmux display things in 256 colors
 set -g default-terminal "tmux-256color-italic"
@@ -81,6 +81,16 @@ bind -r J resize-pane -D 10
 bind -r K resize-pane -U 10
 bind -r L resize-pane -R 10
 
+
+unbind n
+bind n next-window
+unbind ^N
+bind ^N next-window
+unbind p
+bind p previous-window
+unbind ^P
+bind ^P previous-window
+
 # enable mouse support for switching panes/windows
 setw -g mouse on
 
@@ -95,10 +105,10 @@ setw -g mode-keys vi
 # more settings to make copy-mode more vim-like
 unbind [
 bind Escape copy-mode
-unbind p
-bind p paste-buffer
-bind -Tcopy-mode-vi 'v' send -X begin-selection
-bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+#unbind p
+#bind p paste-buffer
+# bind -Tcopy-mode-vi 'v' send -X begin-selection
+# bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 
 # Buffers to/from Mac clipboard, yay tmux book from pragprog
 bind C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
