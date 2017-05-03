@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-ln -s $HOME/.dotfiles/tmux/tmux.conf.symlink .tmux.conf
-ln -s $HOME/.dotfiles/git/gitconfig.symlink .gitconfig
-ln -s $HOME/.dotfiles/eslintrc.symlink .eslintrc
-ln -s $HOME/.dotfiles/jshintrc.symlink .jshintrc
-ln -s $HOME/.dotfiles/jscsrc.symlink_excluded .jscsrc
-ln -s $HOME/.dotfiles/jsbeautifyrc.symlink .jsbeautifyrc
-ln -s $HOME/.dotfiles/git/gitignore_global.symlink .gitignore_global
+ln -s tmux/tmux.conf.symlink $HOME/.tmux.conf
+ln -s git/gitconfig.symlink $HOME/.gitconfig
+ln -s eslintrc.symlink $HOME/.eslintrc
+ln -s jshintrc.symlink $HOME/.jshintrc
+ln -s jscsrc.symlink_excluded $HOME/.jscsrc
+ln -s jsbeautifyrc.symlink $HOME/.jsbeautifyrc
+ln -s git/gitignore_global.symlink $HOME/.gitignore_global
 
 command_exists() {
     type "$1" > /dev/null 2>&1
