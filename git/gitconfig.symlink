@@ -111,12 +111,17 @@
 [color "diff"]
     meta = yellow bold
     frag = magenta bold
-    old = red bold
-    new = green bold
+    plain = white bold
+    old = red bold reverse
+    new = green bold reverse
+    commit = yellow bold
+    func = green dim
+    whitespace = white reverse
 [color "status"]
-    added = green bold
-    changed = yellow bold
-    untracked = red
+    added = yellow
+    changed = green
+    untracked = cyan reverse
+    branch = magenta
 [color "sh"]
     branch = yellow
 [push]
