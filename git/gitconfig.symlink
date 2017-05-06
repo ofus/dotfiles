@@ -1,7 +1,7 @@
 # gitconfig
 [user]
-    name = ofus
-    email = email = andrew@aljweb.com
+    name = Andrew Joseph
+    email = andrew@aljweb.com
 [github]
     user = ofus
 [init]
