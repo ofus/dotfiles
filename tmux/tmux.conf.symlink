@@ -4,10 +4,10 @@
 set -g default-terminal screen-256color-italic
 
 # Tmux has been breaking backwards compability a lot lately.
-if-shell "[[ `tmux -V | awk '{if ($2 < 2.1) print 1; else print 0}'` -eq 1 ]]" 'source $XDG_CONFIG_HOME/tmux/tmux-1.x.conf'
-if-shell "tmux -V | grep -q 2.1" 'source $XDG_CONFIG_HOME/tmux/tmux-2.1.conf'
-if-shell "tmux -V | grep -q 2.2" 'source $XDG_CONFIG_HOME/tmux/tmux-2.2.conf'
-if-shell "tmux -V | grep -q 2.3" 'source $XDG_CONFIG_HOME/tmux/tmux-2.3.conf'
+if-shell "[[ `tmux -V | awk '{if ($2 < 2.1) print 1; else print 0}'` -eq 1 ]]" 'source $HOME/.dotfiles/tmux/tmux-1.x.conf'
+if-shell "tmux -V | grep -q 2.1" 'source $HOME/.dotfiles/tmux/tmux-2.1.conf'
+if-shell "tmux -V | grep -q 2.2" 'source $HOME/.dotfiles/tmux/tmux-2.2.conf'
+if-shell "tmux -V | grep -q 2.3" 'source $HOME/.dotfiles/tmux/tmux-2.3.conf'
 
 set -g history-limit 20000
 
@@ -118,4 +118,4 @@ bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-
 ### Color & Style Settings ###
 ##############################
 
-source ~/.dotfiles/tmux/theme.sh
+source $HOME/.dotfiles/tmux/theme.sh
