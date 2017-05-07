@@ -124,6 +124,11 @@
     branch = magenta
 [color "sh"]
     branch = yellow
+[color "decorate"]
+    head = bold white
+    branch = bold magenta
+    remotebranch = blue
+    tag = bold red
 [push]
     # push will only do the current branch, not all branches
     default = current

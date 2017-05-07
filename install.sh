@@ -8,6 +8,8 @@ ln -s $HOME/.dotfiles/jscsrc.symlink_excluded $HOME/.jscsrc
 ln -s $HOME/.dotfiles/jsbeautifyrc.symlink $HOME/.jsbeautifyrc
 ln -s $HOME/.dotfiles/git/gitignore_global.symlink $HOME/.gitignore_global
 ln -s $HOME/.dotfiles/editorconfig.symlink $HOME/.editorconfig
+ln -s $HOME/.dotfiles/dircolors.symlink $HOME/.dircolors
+ln -s $HOME/.dotfiles/sqliterc.symlink $HOME/.sqliterc
 
 command_exists() {
     type "$1" > /dev/null 2>&1
