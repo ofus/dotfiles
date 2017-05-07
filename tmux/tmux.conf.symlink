@@ -1,10 +1,13 @@
 # set -g default-command "login-shell"
 
-# tmux display things in 256 colors
-set -g default-terminal "tmux-256color-italic"
+# use good colors
+set -g default-terminal screen-256color-italic
 
-# enable terminal compability
-set-option -ga terminal-overrides ",tmux-256color-italic:Tc,xterm-256color-italic:Tc"
+# Tmux has been breaking backwards compability a lot lately.
+if-shell "[[ `tmux -V | awk '{if ($2 < 2.1) print 1; else print 0}'` -eq 1 ]]" 'source $XDG_CONFIG_HOME/tmux/tmux-1.x.conf'
+if-shell "tmux -V | grep -q 2.1" 'source $XDG_CONFIG_HOME/tmux/tmux-2.1.conf'
+if-shell "tmux -V | grep -q 2.2" 'source $XDG_CONFIG_HOME/tmux/tmux-2.2.conf'
+if-shell "tmux -V | grep -q 2.3" 'source $XDG_CONFIG_HOME/tmux/tmux-2.3.conf'
 
 set -g history-limit 20000
 
@@ -90,9 +93,6 @@ unbind p
 bind p previous-window
 unbind ^P
 bind ^P previous-window
-
-# enable mouse support for switching panes/windows
-setw -g mouse on
 
 # maximizing and restoring windows
 unbind Up
