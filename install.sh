@@ -11,6 +11,8 @@ ln -s $HOME/.dotfiles/editorconfig.symlink $HOME/.editorconfig
 ln -s $HOME/.dotfiles/dircolors.symlink $HOME/.dircolors
 ln -s $HOME/.dotfiles/sqliterc.symlink $HOME/.sqliterc
 
+ln -s $HOME/.dotfiles/config/youtube-dl $HOME/.config/youtube-dl
+
 command_exists() {
     type "$1" > /dev/null 2>&1
 }
