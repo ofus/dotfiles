@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+sed -i -E "1 s@#\!/data/data/com.termux/files/usr/bin/@#\!/usr/bin/env bash\n@" $HOME/.dotfiles/install.sh
+
