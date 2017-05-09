@@ -198,11 +198,11 @@
     pushInsteadOf = "gh://"
 
 [url "git@github.com:ofus/"]
-    pushInsteadOf = "gm:"
-    pushInsteadOf = "gm://"
+    pushInsteadOf = "go:"
+    pushInsteadOf = "go://"
 [url "http://github.com/ofus/"]
-    insteadOf = "gm:"
-    insteadOf = "gm://"
+    insteadOf = "go:"
+    insteadOf = "go://"
 
 [url "https://gist.github.com/"]
     insteadOf = "gist:"
