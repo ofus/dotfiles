@@ -178,7 +178,51 @@
     process = git-lfs filter-process
     required = true
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+
+# read from given uri
+# push to writable one
+# http://bit.ly/g9c9Y2
+
+[url "http://github.com/"]
+    insteadOf = "gh:"
+    insteadOf = "gh://"
+
+[url "git@github.com:"]
+    pushInsteadOf = "https://github.com/"
+    pushInsteadOf = "http://github.com/"
+    pushInsteadOf = "gh:"
+    pushInsteadOf = "gh://"
+
+[url "git@github.com:ofus/"]
+    pushInsteadOf = "gm:"
+    pushInsteadOf = "gm://"
+[url "http://github.com/ofus/"]
+    insteadOf = "gm:"
+    insteadOf = "gm://"
+
+[url "https://gist.github.com/"]
+    insteadOf = "gist:"
+[url "git@gist.github.com:"]
+    pushInsteadOf = "https://gist.github.com/"
+    pushInsteadOf = "http://gist.github.com/"
+    pushInsteadOf = "gist:"
+
+[url "git@heroku.com:"]
+    insteadOf = "heroku:"
+
+[url "git@bitbucket.org:ofus/"]
+    insteadOf = "bbm:"
+    pushInsteadOf = "bbm:"
+    insteadOf = "bbm://"
+    pushInsteadOf = "bbm://"
+
+[url "~/Dropbox/.gitrepos/"]
+    insteadOf = "dx:"
+
+[include]
+    path = ~/.gitconfig-local
+    path = ~/.gitconfig-private
