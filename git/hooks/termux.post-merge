@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+termux-fix-shebang $HOME/.dotfiles/install.sh
+
