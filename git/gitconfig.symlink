@@ -214,11 +214,17 @@
 [url "git@heroku.com:"]
     insteadOf = "heroku:"
 
+[url "git@bitbucket.org:"]
+    insteadOf = "bb:"
+    pushInsteadOf = "bb:"
+    insteadOf = "bb://"
+    pushInsteadOf = "bb://"
+
 [url "git@bitbucket.org:ofus/"]
-    insteadOf = "bbm:"
-    pushInsteadOf = "bbm:"
-    insteadOf = "bbm://"
-    pushInsteadOf = "bbm://"
+    insteadOf = "bo:"
+    pushInsteadOf = "bo:"
+    insteadOf = "bo://"
+    pushInsteadOf = "bo://"
 
 [url "~/Dropbox/.gitrepos/"]
     insteadOf = "dx:"
@@ -226,3 +232,4 @@
 [include]
     path = ~/.gitconfig-local
     path = ~/.gitconfig-private
+
