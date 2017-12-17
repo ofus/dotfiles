@@ -71,7 +71,7 @@
     assumed = "!git ls-files -v | grep ^h | cut -c 3-"
     unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
 
-    # clean up all 
+    # clean up all
     forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
 
     # show the most recently touched branches
@@ -103,6 +103,8 @@
     regret = reset
 
     patch = !git --no-pager diff --no-color
+
+    branches = branch -a
 
 [color]
     diff = auto
@@ -172,11 +174,6 @@
 [pager]
     diff = "diff-so-fancy | less --tabs=4 -RFX"
     show = "diff-so-fancy | less --tabs=4 -RFX"
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
 [color "diff-highlight"]
     oldNormal = red bold
     oldHighlight = red bold 52
