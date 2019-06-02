@@ -27,7 +27,7 @@ if [[ ! -e "resources/.added" ]]; then
     fi
 fi
 
-if [[ ! -e "resources/.added" ]]; then
+if ! command_exists npm; then
     read -p "Install NPM and packages? " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
