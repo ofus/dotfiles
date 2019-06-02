@@ -15,54 +15,47 @@ command_exists() {
     type "$1" > /dev/null 2>&1
 }
 
+function install_dotfiles_package()
+{
+    local PACKAGE=$1
+
+    if ! command_exists $PACKAGE; then
+        read -p "Install $PACKAGE? " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            echo "installing $PACKAGE"
+            npm install -g $PACKAGE
+        fi
+    fi
+}
+
 echo "Installing dotfiles."
 
 if [[ ! -e "resources/.added" ]]; then
     read -p "Install truecolor + italics support? (requires sudo) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-    for I in $(ls resources); do sudo tic resources/$I; done
-    echo > "resources/.added"
-    echo "Done"
+      for I in $(ls resources); do sudo tic resources/$I; done
+      echo > "resources/.added"
+      echo "Done"
     fi
 fi
 
 if ! command_exists npm; then
-    read -p "Install NPM and packages? " -n 1 -r
+    read -p "Install NPM? " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         if ! command_exists npm; then
             echo "installing npm"
             sudo apt-get install -y npm
         fi
-
-        if ! command_exists diff-so-fancy; then
-            echo "installing diff-so-fancy"
-            npm install -g diff-so-fancy
-        fi
-
-        if ! command_exists js-beautify; then
-            echo "installing js-beautify"
-            npm install -g js-beautify
-        fi
-
-        if ! command_exists jscs; then
-            echo "installing jscs"
-            npm install -g jscs
-        fi
-
-        if ! command_exists jshint; then
-            echo "installing jshint"
-            npm install -g jshint
-        fi
-
-        if ! command_exists eslint; then
-            echo "installing eslint"
-            npm install -g eslint
-        fi
-
     fi
 fi
+
+install_dotfiles_package js-beautify
+install_dotfiles_package jscs
+install_dotfiles_package jshint
+install_dotfiles_package eslint
 
 echo "Done. Reload your terminal."
 
