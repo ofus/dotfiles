@@ -17,31 +17,52 @@ command_exists() {
 
 echo "Installing dotfiles."
 
-if ! command_exists diff-so-fancy; then
-    echo "installing diff-so-fancy"
-    npm install -g diff-so-fancy
+if [[ ! -e "resources/.added" ]]; then
+    read -p "Install truecolor + italics support? (requires sudo) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+    for I in $(ls resources); do sudo tic resources/$I; done
+    echo > "resources/.added"
+    echo "Done"
+    fi
 fi
 
-if ! command_exists js-beautify; then
-    echo "installing js-beautify"
-    npm install -g js-beautify
-fi
+if [[ ! -e "resources/.added" ]]; then
+    read -p "Install NPM and packages? " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        if ! command_exists npm; then
+            echo "installing npm"
+            sudo apt-get install -y npm
+        fi
 
-if ! command_exists jscs; then
-    echo "installing jscs"
-    npm install -g jscs
-fi
+        if ! command_exists diff-so-fancy; then
+            echo "installing diff-so-fancy"
+            npm install -g diff-so-fancy
+        fi
 
-if ! command_exists jshint; then
-    echo "installing jshint"
-    npm install -g jshint
-fi
+        if ! command_exists js-beautify; then
+            echo "installing js-beautify"
+            npm install -g js-beautify
+        fi
 
-if ! command_exists eslint; then
-    echo "installing eslint"
-    npm install -g eslint
-fi
+        if ! command_exists jscs; then
+            echo "installing jscs"
+            npm install -g jscs
+        fi
 
+        if ! command_exists jshint; then
+            echo "installing jshint"
+            npm install -g jshint
+        fi
+
+        if ! command_exists eslint; then
+            echo "installing eslint"
+            npm install -g eslint
+        fi
+
+    fi
+fi
 
 echo "Done. Reload your terminal."
 
