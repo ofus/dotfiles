@@ -21,10 +21,6 @@ set -g mouse on
 bind -n WheelUpPane   select-pane -t= \; copy-mode -e \; send-keys -M
 bind -n WheelDownPane select-pane -t= \;                 send-keys -M
 
-#if-shell '[[ $(echo "$(tmux -V | cut -d" " -f2) >= 2.1" | bc) -eq 1 ]]' \
-#    'set -g mouse on; bind m set -g mouse on \; display "Mouse ON"; bind M set -g mouse off \; display "Mouse OFF"' \
-#    'set -g mode-mouse on; set -g mouse-resize-pane on; set -g mouse-select-pane on; set -g mouse-select-window on; bind m set -g mode-mouse on \; set -g mouse-resize-pane on \; set -g mouse-select-pane on \; set -g mouse-select-window on \; display "Mouse ON"; bind M set -g mode-mouse off \; set -g mouse-resize-pane off \; set -g mouse-select-pane off \; set -g mouse-select-window off \; display "Mouse OFF"'
-
 # Titles (window number, program name, active (or not)
 set-option -g set-titles on
 set-option -g set-titles-string '#H:#S.#I.#P #W #T'
@@ -138,3 +134,30 @@ bind BTab select-pane -t:.-
 # " windowlist -b
 unbind '"'
 bind '"' choose-window
+
+# Install plugins
+setenv -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/plugins'
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-sessionist'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g @plugin 'sei40kr/tmux-airline-dracula'
+run-shell '. $HOME/.tmux/plugins/tmux-airline-dracula/airline-dracula.tmux'
+
+# set -g status-right 'Continuum status: #{continuum_status}'
+set -g status-right '#{prefix_highlight} | %a %Y-%m-%d %H:%M'
+set -g focus-events on
+# increase scrollback buffer size
+set -g history-limit 500000
+# tmux messages are displayed for 4 seconds
+set -g display-time 4000
+# refresh 'status-left' and 'status-right' more often
+set -g status-interval 5
+# Automatic Tmux start
+# set -g @continuum-boot 'on'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '$HOME/.tmux/plugins/tpm/tpm'
