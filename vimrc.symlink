@@ -1,0 +1,121 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+"syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+Plugin 'ascenator/L9', {'name': 'newL9'}
+" editorconfig
+Plugin 'editorconfig/editorconfig-vim'
+" gruvbox colorscheme
+Plugin 'morhetz/gruvbox'
+" status line
+Plugin 'itchyny/lightline.vim'
+" file browser
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+" comment functions.  see :help nerdcommenter
+Plugin 'scrooloose/nerdcommenter'
+"Plugin 'vim-vdebug/vdebug'
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'tmux-plugins/vim-tmux'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+syntax on
+
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set mouse=a
+"set spell
+set ignorecase
+set smartcase
+set hlsearch
+set modelines=0
+set wildmenu
+set wildmode=longest:full
+set nu "line numbers
+
+" persistent undo
+if !isdirectory($HOME."/.vim/undodir")
+    call mkdir($HOME."/.vim/undodir", "p")
+endif
+
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=2000 "maximum number of changes that can be undone
+set undoreload=20000 "maximum number lines to save for undo on a buffer reload
+
+" set color
+colorscheme gruvbox
+set background=dark
+set colorcolumn=80
+if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+if (has("termguicolors"))
+    set termguicolors
+endif
+
+" set encoding to utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+
+" page up/ page down
+map <silent> <PageUp> 1000<C-U>
+map <silent> <PageDown> 1000<C-D>
+imap <silent> <PageUp> <C-O>1000<C-U>
+imap <silent> <PageDown> <C-O>1000<C-D>
+
+" NERDTree file browser open/close
+map <C-n> :NERDTreeToggle<CR>
+
+" lightline fix
+set laststatus=2
