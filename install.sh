@@ -35,14 +35,12 @@ else
     INSTALL_CMD="I don't know how to install software packages on this system, can't install "
 fi
 
+echo "Installing dotfiles."
+
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    ~/.tmux/plugins/tpm/bin/install_plugins
-else
-    ~/.tmux/plugins/tpm/bin/update_plugins all
-fi
+[[ ! -e "$HOME/.gitconfig" ]] && ln -s "$DOTFILES_DIR/git/gitconfig.symlink" ~/.gitconfig
+[[ ! -e "$HOME/.gitignore_global" ]] && ln -s "$DOTFILES_DIR/git/gitignore_global.symlink" ~/.gitignore_global
 
 mkdir -p ~/.oldtmux~
 [[ -h "$HOME/.tmux.conf" ]] && rm ~/.tmux.conf
@@ -50,8 +48,14 @@ mkdir -p ~/.oldtmux~
 [[ -h "$HOME/.tmux/tmux.conf" ]] && rm ~/.tmux/tmux.conf
 [[ -e "$HOME/.tmux/tmux.conf" ]] && mv ~/.tmux/tmux.conf "$HOME/.tmux/.tmux.conf.bak.$(date +%Y%m%d%H%M%S)~"
 ln -s "$DOTFILES_DIR/tmux/tmux.conf.symlink" ~/.tmux.conf
-[[ ! -e "$HOME/.gitconfig" ]] && ln -s "$DOTFILES_DIR/git/gitconfig.symlink" ~/.gitconfig
-[[ ! -e "$HOME/.gitignore_global" ]] && ln -s "$DOTFILES_DIR/git/gitignore_global.symlink" ~/.gitignore_global
+
+if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    $HOME/.tmux/plugins/tpm/bin/install_plugins
+else
+    $HOME/.tmux/plugins/tpm/bin/update_plugins all
+fi
+
 [[ ! -e "$HOME/.eslintrc" ]] && ln -s "$DOTFILES_DIR/eslintrc.symlink" ~/.eslintrc
 [[ ! -e "$HOME/.jshintrc" ]] && ln -s "$DOTFILES_DIR/jshintrc.symlink" ~/.jshintrc
 [[ ! -e "$HOME/.jscsrc" ]] && ln -s "$DOTFILES_DIR/jscsrc.symlink_excluded" ~/.jscsrc
@@ -60,7 +64,6 @@ ln -s "$DOTFILES_DIR/tmux/tmux.conf.symlink" ~/.tmux.conf
 [[ ! -e "$HOME/.dircolors" ]] && ln -s "$DOTFILES_DIR/dircolors.symlink" ~/.dircolors
 [[ ! -e "$HOME/.sqliterc" ]] && ln -s "$DOTFILES_DIR/sqliterc.symlink" ~/.sqliterc
 
-echo "Installing dotfiles."
 
 if [[ ! -e "$DOTFILES_DIR/resources/.added" ]]; then
     read -p "Install truecolor + italics support?" -n 1 -r

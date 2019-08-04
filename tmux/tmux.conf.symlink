@@ -145,7 +145,6 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-sessionist'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 set -g @plugin 'sei40kr/tmux-airline-dracula'
-run-shell '. $HOME/.tmux/plugins/tmux-airline-dracula/airline-dracula.tmux'
 
 # set -g status-right 'Continuum status: #{continuum_status}'
 set -g status-right '#{prefix_highlight} | %a %Y-%m-%d %H:%M'
@@ -161,3 +160,4 @@ set -g status-interval 5
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '$HOME/.tmux/plugins/tpm/tpm'
+run-shell '. $HOME/.tmux/plugins/tmux-airline-dracula/airline-dracula.tmux'
