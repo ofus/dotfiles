@@ -51,9 +51,6 @@ ln -s "$DOTFILES_DIR/tmux/tmux.conf.symlink" ~/.tmux.conf
 
 if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    $HOME/.tmux/plugins/tpm/bin/install_plugins
-else
-    $HOME/.tmux/plugins/tpm/bin/update_plugins all
 fi
 
 [[ ! -e "$HOME/.eslintrc" ]] && ln -s "$DOTFILES_DIR/eslintrc.symlink" ~/.eslintrc
@@ -69,7 +66,7 @@ if [[ ! -e "$DOTFILES_DIR/resources/.added" ]]; then
     read -p "Install truecolor + italics support?" -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        for I in "$DOTFILES_DIR/resources/*"; do tic "$I"; done
+        for I in "$DOTFILES_DIR"/resources/*; do tic "$I"; done
         echo > "$DOTFILES_DIR/resources/.added"
         echo "Done"
     fi
@@ -87,7 +84,7 @@ fi
 install_dotfiles_package js-beautify
 install_dotfiles_package jscs
 install_dotfiles_package jshint
-install_dotfiles_package eslint
+# install_dotfiles_package eslint
 
 read -p "Customize Vim? " -n 1 -r
 echo
