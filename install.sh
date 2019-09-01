@@ -51,6 +51,9 @@ ln -s "$DOTFILES_DIR/tmux/tmux.conf.symlink" ~/.tmux.conf
 
 if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ~/.tmux/plugins/tpm/bin/install_plugins
+else
+    ~/.tmux/plugins/tpm/bin/update_plugins all
 fi
 
 [[ ! -e "$HOME/.eslintrc" ]] && ln -s "$DOTFILES_DIR/eslintrc.symlink" ~/.eslintrc
@@ -61,16 +64,7 @@ fi
 [[ ! -e "$HOME/.dircolors" ]] && ln -s "$DOTFILES_DIR/dircolors.symlink" ~/.dircolors
 [[ ! -e "$HOME/.sqliterc" ]] && ln -s "$DOTFILES_DIR/sqliterc.symlink" ~/.sqliterc
 
-
-if [[ ! -e "$DOTFILES_DIR/resources/.added" ]]; then
-    read -p "Install truecolor + italics support?" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        for I in "$DOTFILES_DIR"/resources/*; do tic "$I"; done
-        echo > "$DOTFILES_DIR/resources/.added"
-        echo "Done"
-    fi
-fi
+for I in "$DOTFILES_DIR"/resources/*; do tic "$I"; done
 
 if ! command_exists npm; then
     read -p "Install NPM? " -n 1 -r
@@ -81,10 +75,11 @@ if ! command_exists npm; then
     fi
 fi
 
+install_dotfiles_package diff-so-fancy
 install_dotfiles_package js-beautify
 install_dotfiles_package jscs
 install_dotfiles_package jshint
-# install_dotfiles_package eslint
+install_dotfiles_package eslint
 
 read -p "Customize Vim? " -n 1 -r
 echo
@@ -95,7 +90,14 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     [[ -e "$HOME/.vimrc" ]] && mv ~/.vimrc "$HOME/.vimrc.bak.$(date +%Y%m%d%H%M%S)~"
     ln -s "$DOTFILES_DIR/vimrc.symlink" ~/.vimrc
     [[ ! -d "$HOME/.vim/bundle/Vundle.vim" ]] && git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
+    if [[ ! -d "$HOME/.vim/bundle/Vundle.vim" ]]; then
+        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+        vim +PluginInstall +qall
+    else
+        vim +PluginUpdate +qall
+    fi
 fi
 
-echo "Done. Reload your terminal."
+echo "Done. Reloading your terminal..."
+exec bash
+
